@@ -1,20 +1,4 @@
 <!DOCTYPE html>
-<html>
-
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JSFiddle b2503kpz</title>
-
-  <style>
-    
-  </style>
-
-  
-</head>
-<body>
-  <!DOCTYPE html>
 <html lang="my">
 <head>
   <meta charset="UTF-8" />
@@ -28,22 +12,33 @@
       color: #333;
     }
 
-    .header {
-      background-color: #ffffff;
+    .main-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       padding: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .form-container {
-      padding: 20px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
       background: #f9f9f9;
-      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-container h3 {
+      margin-bottom: 15px;
     }
 
     .form-container input {
-      margin: 5px;
+      margin: 5px 0;
       padding: 10px;
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .form-container button {
@@ -54,40 +49,48 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      width: 100%;
     }
 
     .container {
-      text-align: center;
-      padding: 30px 20px 10px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 430px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .checkmark-circle {
-      width: 60px;
-      height: 60px;
+      width: 57px;
+      height: 57px;
       border-radius: 50%;
       background-color:  #0052cc;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
+      font-size: 37px;
       margin: 0 auto 10px;
     }
 
     .status {
-      font-size: 17px;
+      font-size: 14px;
       margin: 10px 0 5px;
        color: #0066cc;
+      text-align: center;
     }
 
     .amount {
       font-size: 32px;
       color: black;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     .amount span {
-      font-size: 14px;
+      font-size: 11px;
       color: #555;
     }
 
@@ -100,14 +103,14 @@
     .info {
       max-width: 600px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 10px;
     }
 
     .info-row {
       display: flex;
       justify-content: space-between;
-      margin: 35px 0;
-      font-size: 15px;
+      margin: 30px 0;
+      font-size: 12px;
     }
 
     .label {
@@ -122,12 +125,12 @@
 
     .button-group {
       text-align: center;
-      margin-top: 250px;
+      margin-top: 230px;
     }
 
     .btn {
       font-family: 'Myanmar Text', sans-serif;
-      font-size: 16px;
+      font-size: 13px;
       padding: 10px 20px;
       border-radius: 8px;
       border: none;
@@ -146,59 +149,100 @@
       color: #333;
       font-weight: bold;
     }
+
+
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .main-wrapper {
+        flex-direction: column;
+        padding: 100px;
+      }
+
+      .form-container, .container {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .label, .value {
+        width: 100%;
+        text-align: left;
+        margin: 2px 0;
+      }
+
+      .amount {
+        font-size: 24px;
+      }
+
+      .checkmark-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+      }
+
+      .status {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="form-container">
-    <h3>ပြေစာအချက်အလက် ဖြည့်ပါ</h3>
-    <input id="amount" placeholder="ငွေပမာဏ eg: -5,000.00">
-    
-    <div id="time-display" style="margin: 10px 0; font-size: 16px; font-weight: bold;">
-      လက်ရှိအချိန်: <span id="current-time">--/--/---- --:--:--</span>
-    </div>
-     <input id="receiver" placeholder="လက်ခံသူ eg: Daw Aye Mi San">
-    <input id="phone" placeholder="ဖုန်း eg: 7894">
-    <input id="note" placeholder="မှတ်ချက် eg: ငွေပေးချေခြင်း">
-    <button onclick="updateReceipt()">ပြောင်းပါ</button>
-  </div>
-
-  <div class="container">
-    <div class="checkmark-circle">✓</div>
-    <div class="status">လုပ်ဆောင်မှုအောင်မြင်ပါသည်</div>
-    <div class="amount" id="r-amount">-5,000.00 <span>(Ks)</span></div>
-    <div class="divider"></div>
-
-    <div class="info">
-      <div class="info-row">
-        <div class="label">လုပ်ဆောင်သော အချိန်</div>
-        <div class="value" id="r-time">22/03/2025 22:28:18</div>
+  <div class="main-wrapper">
+    <div class="form-container">
+      <h3>ပြေစာအချက်အလက် ဖြည့်ပါ</h3>
+      <input id="amount" placeholder="ငွေပမာဏ eg: -5,000.00">
+      <div id="time-display" style="margin: 10px 0; font-size: 16px; font-weight: bold;">
+        လက်ရှိအချိန်: <span id="current-time">--/--/---- --:--:--</span>
       </div>
-      <div class="info-row">
-        <div class="label">လုပ်ဆောင်မှုအမှတ်</div>
-        <div class="value" id="r-txn">0100373309145420</div>
-      </div>
-      <div class="info-row">
-        <div class="label">လုပ်ဆောင်မှုအမျိုးအစား</div>
-        <div class="value">ငွေလွဲ</div>
-      </div>
-      <div class="info-row">
-        <div class="label">ငွေလွဲမည် သို့</div>
-        <div class="value" id="r-receiver">Daw Aye Mi San (******7894)</div>
-      </div>
-      <div class="info-row">
-        <div class="label">ငွေပမာဏ</div>
-        <div class="value" id="r-amount-text">-5,000.00 Ks</div>
-      </div>
-      <div class="info-row">
-        <div class="label">မှတ်ချက်</div>
-        <div class="value" id="r-note">ငွေပေးချေခြင်း</div>
-      </div>
+      <input id="receiver" placeholder="လက်ခံသူ eg: Daw Aye Mi San">
+      <input id="phone" placeholder="ဖုန်း eg: 7894">
+      <input id="note" placeholder="မှတ်ချက် eg: ငွေပေးချေခြင်း">
+      <button onclick="updateReceipt()">ပြောင်းပါ</button>
     </div>
 
-    <div class="button-group">
-      <button class="btn primary">အဆင်ပြေသည်</button><br />
-      <button class="btn secondary" onclick="window.print()">ပြေစာအားသိမ်းမည်</button>
+    <div class="container">
+      <div class="checkmark-circle">✓</div>
+      <div class="status">လုပ်ဆောင်မှုအောင်မြင်ပါသည်</div>
+      <div class="amount" id="r-amount">-5,000.00 <span>(Ks)</span></div>
+      <div class="divider"></div>
+
+      <div class="info">
+        <div class="info-row">
+          <div class="label">လုပ်ဆောင်သော အချိန်</div>
+          <div class="value" id="r-time">22/03/2025 22:28:18</div>
+        </div>
+        <div class="info-row">
+          <div class="label">လုပ်ဆောင်မှုအမှတ်</div>
+          <div class="value" id="r-txn">0100373309145420</div>
+        </div>
+        <div class="info-row">
+          <div class="label">လုပ်ဆောင်မှုအမျိုးအစား</div>
+          <div class="value">ငွေလွဲ</div>
+        </div>
+        <div class="info-row">
+          <div class="label">ငွေလွဲမည် သို့</div>
+          <div class="value" id="r-receiver">Daw Aye Mi San (******7894)</div>
+        </div>
+        <div class="info-row">
+          <div class="label">ငွေပမာဏ</div>
+          <div class="value" id="r-amount-text">-5,000.00 Ks</div>
+        </div>
+        <div class="info-row">
+          <div class="label">မှတ်ချက်</div>
+          <div class="value" id="r-note">ငွေပေးချေခြင်း</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn primary">အဆင်ပြေသည်</button><br />
+        <button class="btn secondary" onclick="window.print()">ပြေစာအားသိမ်းမည်</button>
+      </div>
     </div>
   </div>
 
@@ -211,14 +255,12 @@
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       const myanmarTime = new Date(utc + (6.5 * 60 * 60 * 1000));
-
       const yyyy = myanmarTime.getFullYear();
       const mm = pad(myanmarTime.getMonth() + 1);
       const dd = pad(myanmarTime.getDate());
       const hh = pad(myanmarTime.getHours());
       const min = pad(myanmarTime.getMinutes());
       const ss = pad(myanmarTime.getSeconds());
-
       return `${dd}/${mm}/${yyyy} ${hh}:${min}:${ss}`;
     }
 
@@ -229,37 +271,34 @@
       }
       return txn;
     }
-function formatAmount(amount) {
-  let num = parseFloat(amount.replace(/,/g, ''));
-  if (isNaN(num)) return amount;
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(num);
-}
 
-   function updateReceipt() {
-  const amountInput = document.getElementById("amount").value;
-  const receiver = document.getElementById("receiver").value;
-  const phone = document.getElementById("phone").value;
-  const note = document.getElementById("note").value;
+    function formatAmount(amount) {
+      let num = parseFloat(amount.replace(/,/g, ''));
+      if (isNaN(num)) return amount;
+      return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(num);
+    }
 
-  const time = getMyanmarTimeString();
-  const txn = generateRandomTxnId();
+    function updateReceipt() {
+      const amountInput = document.getElementById("amount").value;
+      const receiver = document.getElementById("receiver").value;
+      const phone = document.getElementById("phone").value;
+      const note = document.getElementById("note").value;
+      const time = getMyanmarTimeString();
+      const txn = generateRandomTxnId();
+      const formattedAmount = formatAmount(amountInput);
 
-  const formattedAmount = formatAmount(amountInput);
+      document.getElementById("current-time").innerText = time;
+      document.getElementById("r-amount").innerHTML = formattedAmount + ' <span>(Ks)</span>';
+      document.getElementById("r-time").innerText = time;
+      document.getElementById("r-txn").innerText = txn;
+      document.getElementById("r-receiver").innerText = receiver + ' (******' + phone + ')';
+      document.getElementById("r-amount-text").innerText = formattedAmount + ' Ks';
+      document.getElementById("r-note").innerText = note;
+    }
 
-  document.getElementById("current-time").innerText = time;
-  document.getElementById("r-amount").innerHTML = formattedAmount + ' <span>(Ks)</span>';
-  document.getElementById("r-time").innerText = time;
-  document.getElementById("r-txn").innerText = txn;
-  document.getElementById("r-receiver").innerText = receiver + ' (******' + phone + ')';
-  document.getElementById("r-amount-text").innerText = formattedAmount + ' Ks';
-  document.getElementById("r-note").innerText = note;
-}
-
-
-    // Auto-set current time on page load
     window.onload = function () {
       const time = getMyanmarTimeString();
       document.getElementById("current-time").innerText = time;
@@ -268,9 +307,3 @@ function formatAmount(amount) {
 </body>
 </html>
 
-
-  <script>
-    
-  </script>
-</body>
-</html>
