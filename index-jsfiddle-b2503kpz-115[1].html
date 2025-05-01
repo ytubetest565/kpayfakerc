@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle b2503kpz</title>
+
+  <style>
+    
+  </style>
+
+  
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Receipt</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    .header {
+      background-color: #ffffff;
+      padding: 20px;
+    }
+
+    .form-container {
+      padding: 20px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .form-container input {
+      margin: 5px;
+      padding: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .form-container button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #0052cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    .checkmark-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color:  #0052cc;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 10px;
+    }
+
+    .status {
+      font-size: 17px;
+      margin: 10px 0 5px;
+       color: #0066cc;
+    }
+
+    .amount {
+      font-size: 32px;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    .amount span {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .divider {
+      border-top: 1px solid #ddd;
+      margin: 40px auto;
+      width: 90%;
+    }
+
+    .info {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 35px 0;
+      font-size: 15px;
+    }
+
+    .label {
+      color: #888;
+      text-align: left;
+    }
+
+    .value {
+      color: #000;
+      text-align: right;
+    }
+
+    .button-group {
+      text-align: center;
+      margin-top: 250px;
+    }
+
+    .btn {
+      font-family: 'Myanmar Text', sans-serif;
+      font-size: 16px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+      width: 200px;
+    }
+
+    .btn.primary {
+      background-color: #0052cc;
+      color: white;
+    }
+
+    .btn.secondary {
+      background-color: #f1f1f1;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h3>ပြေစာအချက်အလက် ဖြည့်ပါ</h3>
+    <input id="amount" placeholder="ငွေပမာဏ eg: -5,000.00">
+    
+    <div id="time-display" style="margin: 10px 0; font-size: 16px; font-weight: bold;">
+      လက်ရှိအချိန်: <span id="current-time">--/--/---- --:--:--</span>
+    </div>
+     <input id="receiver" placeholder="လက်ခံသူ eg: Daw Aye Mi San">
+    <input id="phone" placeholder="ဖုန်း eg: 7894">
+    <input id="note" placeholder="မှတ်ချက် eg: ငွေပေးချေခြင်း">
+    <button onclick="updateReceipt()">ပြောင်းပါ</button>
+  </div>
+
+  <div class="container">
+    <div class="checkmark-circle">✓</div>
+    <div class="status">လုပ်ဆောင်မှုအောင်မြင်ပါသည်</div>
+    <div class="amount" id="r-amount">-5,000.00 <span>(Ks)</span></div>
+    <div class="divider"></div>
+
+    <div class="info">
+      <div class="info-row">
+        <div class="label">လုပ်ဆောင်သော အချိန်</div>
+        <div class="value" id="r-time">22/03/2025 22:28:18</div>
+      </div>
+      <div class="info-row">
+        <div class="label">လုပ်ဆောင်မှုအမှတ်</div>
+        <div class="value" id="r-txn">0100373309145420</div>
+      </div>
+      <div class="info-row">
+        <div class="label">လုပ်ဆောင်မှုအမျိုးအစား</div>
+        <div class="value">ငွေလွဲ</div>
+      </div>
+      <div class="info-row">
+        <div class="label">ငွေလွဲမည် သို့</div>
+        <div class="value" id="r-receiver">Daw Aye Mi San (******7894)</div>
+      </div>
+      <div class="info-row">
+        <div class="label">ငွေပမာဏ</div>
+        <div class="value" id="r-amount-text">-5,000.00 Ks</div>
+      </div>
+      <div class="info-row">
+        <div class="label">မှတ်ချက်</div>
+        <div class="value" id="r-note">ငွေပေးချေခြင်း</div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn primary">အဆင်ပြေသည်</button><br />
+      <button class="btn secondary" onclick="window.print()">ပြေစာအားသိမ်းမည်</button>
+    </div>
+  </div>
+
+  <script>
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
+
+    function getMyanmarTimeString() {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const myanmarTime = new Date(utc + (6.5 * 60 * 60 * 1000));
+
+      const yyyy = myanmarTime.getFullYear();
+      const mm = pad(myanmarTime.getMonth() + 1);
+      const dd = pad(myanmarTime.getDate());
+      const hh = pad(myanmarTime.getHours());
+      const min = pad(myanmarTime.getMinutes());
+      const ss = pad(myanmarTime.getSeconds());
+
+      return `${dd}/${mm}/${yyyy} ${hh}:${min}:${ss}`;
+    }
+
+    function generateRandomTxnId() {
+      let txn = '';
+      for (let i = 0; i < 16; i++) {
+        txn += Math.floor(Math.random() * 10);
+      }
+      return txn;
+    }
+function formatAmount(amount) {
+  let num = parseFloat(amount.replace(/,/g, ''));
+  if (isNaN(num)) return amount;
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(num);
+}
+
+   function updateReceipt() {
+  const amountInput = document.getElementById("amount").value;
+  const receiver = document.getElementById("receiver").value;
+  const phone = document.getElementById("phone").value;
+  const note = document.getElementById("note").value;
+
+  const time = getMyanmarTimeString();
+  const txn = generateRandomTxnId();
+
+  const formattedAmount = formatAmount(amountInput);
+
+  document.getElementById("current-time").innerText = time;
+  document.getElementById("r-amount").innerHTML = formattedAmount + ' <span>(Ks)</span>';
+  document.getElementById("r-time").innerText = time;
+  document.getElementById("r-txn").innerText = txn;
+  document.getElementById("r-receiver").innerText = receiver + ' (******' + phone + ')';
+  document.getElementById("r-amount-text").innerText = formattedAmount + ' Ks';
+  document.getElementById("r-note").innerText = note;
+}
+
+
+    // Auto-set current time on page load
+    window.onload = function () {
+      const time = getMyanmarTimeString();
+      document.getElementById("current-time").innerText = time;
+    };
+  </script>
+</body>
+</html>
+
+
+  <script>
+    
+  </script>
+</body>
+</html>
