@@ -41,20 +41,17 @@
     }
 
     .receipt {
-      width: 100%;
-      max-width: 430px;
+      width: 430px;
       height: 900px;
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 20px;
       box-sizing: border-box;
-      margin: 0 auto;
     }
     
     .container {
-      width: 100%;
-      max-width: 430px;
-      height: auto;
+      width: 430px;
+      height: 900px;
       margin: 0 auto;
       text-align: center;
       padding: 30px 20px 10px;
@@ -107,19 +104,16 @@
       justify-content: space-between;
       margin: 35px 0;
       font-size: 15px;
-      flex-wrap: wrap; /* Added for better responsiveness */
     }
 
     .label {
       color: #888;
       text-align: left;
-      flex-basis: 45%; /* Adjust width of label */
     }
 
     .value {
       color: #000;
       text-align: right;
-      flex-basis: 45%; /* Adjust width of value */
     }
 
     .button-group {
@@ -147,56 +141,6 @@
       background-color: #f1f1f1;
       color: #333;
       font-weight: bold;
-    }
-
-    /* Mobile responsive design */
-    @media screen and (max-width: 768px) {
-      .container {
-        padding: 15px 10px;
-      }
-      .amount {
-        font-size: 24px;
-      }
-      .info-row {
-        font-size: 13px;
-      }
-      .checkmark-circle {
-        font-size: 30px;
-        width: 50px;
-        height: 50px;
-      }
-      .status {
-        font-size: 14px;
-      }
-      .button-group {
-        margin-top: 150px;
-      }
-      .btn {
-        width: 150px;
-      }
-    }
-
-    /* Small mobile devices */
-    @media screen and (max-width: 480px) {
-      .label, .value {
-        font-size: 12px;
-      }
-      .info-row {
-        font-size: 12px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .label {
-        text-align: left;
-        width: 100%;
-      }
-      .value {
-        text-align: left;
-        width: 100%;
-      }
-      .button-group {
-        margin-top: 100px;
-      }
     }
   </style>
 </head>
